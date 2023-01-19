@@ -2,6 +2,8 @@
 
 import {
   validateEmail,
+  validateName,
+  validateNoSpace,
   validatePassword,
   validatePhone,
 } from "./utils/validation";
@@ -25,29 +27,43 @@ export function validateValue(value, name, rule) {
   let errors = "";
 
   if (rule.required === true) {
-    if (value.length === 0) errors = "This is a is required field";
-  } else {
-    switch (rule.type) {
-      case "email": {
-        if (!validateEmail(value) && value.length !== 0) {
-          errors = "Email address is invalid";
+    if (value.length === 0) {
+      errors = "This is a is required field";
+    } else {
+      switch (rule.type) {
+        case "email": {
+          if (!validateEmail(value) && value.length !== 0) {
+            errors = "Email address is invalid";
+          }
+          break;
         }
-        break;
-      }
-      case "password": {
-        if (!validatePassword(value) && value.length !== 0) {
-          errors = "Password must be 8 or more characters";
+        case "password": {
+          if (!validatePassword(value) && value.length !== 0) {
+            errors = "Password must be 8 or more characters";
+          }
+          break;
         }
-        break;
-      }
-      case "phoneNumber": {
-        if (!validatePhone(value) && value.length !== 0) {
-          errors = "Phone number is invalid";
+        case "phoneNumber": {
+          if (!validatePhone(value) && value.length !== 0) {
+            errors = "Phone number is invalid";
+          }
+          break;
         }
-        break;
-      }
-      default: {
-        errors = "";
+        case "name": {
+          if (!validateName(value) && value.length !== 0) {
+            errors = "Name is invalid";
+          }
+          break;
+        }
+        case "noSpace": {
+          if (!validateNoSpace(value) && value.length !== 0) {
+            errors = "No spaces allowed";
+          }
+          break;
+        }
+        default: {
+          errors = "";
+        }
       }
     }
   }

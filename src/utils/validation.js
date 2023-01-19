@@ -32,3 +32,7 @@ export const validateNoWhitespaceAtBeginningAndEnd = (value) => {
 export const validateSelectTag = (value) => {
   return Object.keys(value).length !== 0;
 };
+
+export const validateNoSpace = (value) => {
+  return REGEX.NO_SPACE.test(value);
+};

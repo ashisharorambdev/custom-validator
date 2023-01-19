@@ -18,6 +18,27 @@ function App() {
         <div className='column is-4 is-offset-4'>
           <div className='box'>
             <form onSubmit={handleSubmit} noValidate>
+            <div className='field'>
+                <label className='label'>Name</label>
+                <div className='control'>
+                  <input
+                    autoComplete='off'
+                    className={`input ${errors.email && "is-danger"}`}
+                    // type='email'
+                    name='name'
+                    onChange={handleChange}
+                    value={values.name || ""}
+                    ref={(inputRef) =>
+                      register({ required: true, type: "name" }, inputRef)
+                    }
+                    onBlur={handlrBlur}
+                    required
+                  />
+                  {errors.name && (
+                    <p className='help is-danger'>{errors.name}</p>
+                  )}
+                </div>
+              </div>
               <div className='field'>
                 <label className='label'>Email Address</label>
                 <div className='control'>
