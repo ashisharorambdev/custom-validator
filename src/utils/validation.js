@@ -36,3 +36,7 @@ export const validateSelectTag = (value) => {
 export const validateNoSpace = (value) => {
   return REGEX.NO_SPACE.test(value);
 };
+
+export const validatePostal=(value)=>{
+  return REGEX.PINCODE.test(value)
+}

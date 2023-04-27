@@ -1,18 +1,20 @@
 /** @format */
 
 import { useState, useEffect } from "react";
-import { validateValue } from "../LoginFormValidationRules";
+import { validateValue } from "../ValidationRules";
 
 const useForm = (callback) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   var inputRules = {};
+
   useEffect(() => {
-    if (Object.keys(errors).length === 0 && isSubmitting) {
+    if (isSubmitting) {
       callback();
+      setIsSubmitting(false)
     }
-  }, [errors]);
+  }, [isSubmitting]);
 
   const handlrBlur = (event) => {
     let Errors = { ...errors };
@@ -25,9 +27,10 @@ const useForm = (callback) => {
   };
 
   const handleSubmit = (event) => {
-    if (event) event.preventDefault();
-    // setErrors(validate(values));
-    setIsSubmitting(true);
+    if (event) {
+      event.preventDefault();
+      setIsSubmitting(true);
+    }
   };
 
   const handleChange = (event) => {
